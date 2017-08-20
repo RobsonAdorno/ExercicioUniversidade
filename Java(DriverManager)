@@ -1,0 +1,44 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class banco_de_dados {
+	public static void main(String[]args){
+		try {//Usamos try catch porque estamos usando o static void
+			
+			Class.forName("com.mysql.jdbc.Driver");
+		
+		} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+		}
+		
+		try {
+			
+			Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost/Loja","root","123456");
+			//Criar o comando para executar o sql
+			
+			Statement comando = null;
+			comando = conexao.createStatement();
+			
+			String sql = "select * from inf_loja;";
+			
+			ResultSet rsLojas = comando.executeQuery(sql);
+			
+			
+			while (rsLojas.next()){
+				System.out.println(
+				rsLojas.getInt("id_loja") + ":"+
+				rsLojas.getString("nome"));
+				
+				
+			}
+			
+		} catch (SQLException e1) {
+			
+			
+			e1.printStackTrace();
+		}
+	}
+}
