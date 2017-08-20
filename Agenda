@@ -1,0 +1,101 @@
+package Provinha;
+
+import java.io.*;
+import java.util.*;
+
+public class Exemplo2 {
+
+	public static void main(String []args){
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("Selecione uma opção abaixo:");
+		System.out.println("-----------------------------------");
+		System.out.println("[1] - Novo Contato");
+		System.out.println("-----------------------------------");
+		System.out.println("[2] - Ver agenda");
+		System.out.println("-----------------------------------");
+		System.out.println("[3] - Sair");
+		System.out.println("-----------------------------------");
+		
+		int sele = teclado.nextInt();
+		int i = 0;
+		
+		switch(sele){
+		
+		case 1:
+			String cont = "s";
+			while(cont.equals("s")|| (cont.equals("S"))){
+
+				System.out.println("Nome");
+				String nome = teclado.next();
+				//String A[] = nome.split(",");
+				System.out.println("Email");
+				String email = teclado.next();
+				//String B[] = nome.split(",");
+				System.out.println("Telefone");
+				String telefone = teclado.next();
+				//String C[] = nome.split(",");
+			
+			while(i < 4){
+			
+				try{
+				FileWriter gravar = new FileWriter("/home/fantasy/Desktop/Arquivo.txt");
+				BufferedWriter e = new BufferedWriter(gravar);
+				PrintWriter c = new PrintWriter(gravar);
+				c.write(nome+ ";" +email+";"+ telefone);
+				
+				System.out.println("Dados inseridos com sucesso!");
+				i++;
+				gravar.close();
+				}catch(IOException e){
+					System.err.printf("Erro" + e.getMessage());
+				}
+			}
+			//______________________________________________________
+			System.out.println("Vocẽ deseja continuar continuar?");
+			cont = teclado.next();
+			
+			if(cont.equals("n")|| (cont.equals("N"))){
+				System.out.println("Saindo da aplicação");
+				System.exit(0);
+			}
+			}
+		break;
+		
+		case 2:
+			System.out.println("Selecionado Ver Agenda");
+			try{
+			FileReader carregar = new FileReader("/home/fantasy/Desktop/Arquivo.txt");
+				BufferedReader car = new BufferedReader(carregar);
+				String linha = "";
+				String A[] = linha.split(";");
+				String B[] = linha.split(";");
+				String C[] = linha.split(";");
+			 while ( ( linha = car.readLine() ) != null) {
+			
+				 System.out.println("Nome\t" + "Email\t" + "Telefone");
+				 System.out.printf("%s\n\t", linha);
+				 linha = car.readLine();
+
+				 
+				 
+				  }	
+			}catch(IOException e){
+				System.err.printf("Erro ao carregar o arquivo",e.getMessage());
+			}
+			break;
+		case 3:
+			System.out.println("Programa finalizado!");
+			System.exit(0);
+			break;
+			
+		default:
+			System.out.println("Opção invalida");
+			System.exit(0);
+		
+		}
+		
+		
+		
+		
+	}
+}
