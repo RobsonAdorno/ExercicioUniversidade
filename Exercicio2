@@ -1,0 +1,165 @@
+package Desenvolvimento;
+
+import java.util.Scanner;
+import java.io.*;
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+public class Exercicio extends testando{
+
+	
+	public static void main(String []args){
+				testando t1 = new testando();
+				Scanner teclado = new Scanner(System.in);
+				String vetor[] = new String[100];
+				double matriz[][]= new double[100][5];		
+				String d = null;
+				String c = null;
+				int i = 0, j = 0;
+				String nomearquivo;
+				String e = "s";
+				String des = null;
+				
+				while(d != "4"){
+				System.out.println("Por favor, digite a opção desejada");
+				System.out.println("-----------------------------------------");
+				System.out.println("[1] - Lançar notas para a turma");
+				System.out.println("-----------------------------------------");
+				System.out.println("[2] - Ver notas da turma");
+				System.out.println("-----------------------------------------");
+				System.out.println("[3] - Ver resultados");
+				System.out.println("-----------------------------------------");
+				System.out.println("[4] - Sair");
+				System.out.println("-----------------------------------------");
+				d = null;
+				d = teclado.next();
+				
+				switch(d){
+				case "1": 
+				while(i < 100){
+					System.out.println("Você selecionou a primeira opção, lançar notas para a turma");					
+						System.out.println("Por favor, de qual turma pertence o(s) Aluno(s)");
+						des = teclado.next();
+						t1.hue(des);
+						File arq = new File("/home/fantasy/Desktop/ " +des + " .txt");											
+					System.out.println("Por favor, digite o(s) nome(s) do(s) Aluno(s)");
+					String a = teclado.next();
+					String nomes[] = a.split(",");
+					System.out.println("Por favor, digite a(s) nota(s) do(s) Aluno(s)");
+					matriz[i][5] = teclado.nextInt();	
+					System.out.println("Você gostaria de lançar mais nota(s) para essa turma?");
+					e = teclado.next();				
+					i++;
+					
+					if(e.equals("s") || (e.equals("S"))){
+						System.out.println("Selecionada a turma " + des + " .txt");						
+						System.out.println("Por favor, digite o(s) nome(s) do(s) Aluno(s)");
+						String w = teclado.next();
+						String nomeas[] = a.split(",");
+						System.out.println("Por favor, digite a(s) nota(s) do(s) Aluno(s)");
+						matriz[i][5] = teclado.nextInt();	
+						System.out.println("Você gostaria de lançar mais nota(s) para essa turma?");
+						e = teclado.next();				
+					
+					
+					}else if(e.equals("n") || (e.equals("N"))){
+						System.out.println(e);
+						System.out.println("Ok, agora você quer sair ou ir para o menu?");
+						String menu = teclado.next();
+						
+						switch(menu){
+						case ("sair"):
+							System.out.println("Você escolheu sair da aplicação");
+						
+						try{
+							System.out.printf("Salvando dados...");				
+							
+							FileWriter gravador = new FileWriter(des);
+							gravador.write("Nomes: " + vetor[i]);
+							gravador.write(System.lineSeparator());
+							gravador.write("Notas: " + matriz[i][i]);
+							gravador.close();
+							System.out.printf(String.format("Turma %s salva com sucesso!", des));
+							System.out.println("Finalizando aplicação...");
+							i = 101;
+						
+							
+						}catch(IOException es){
+							
+							System.err.printf("Erro na gravação do arquivo: %s \n", es.getMessage());
+								
+						}				
+						
+						System.exit(0);
+							break;
+						case("menu"):
+							System.out.println("Voltando para o menu principal...");
+						
+						try{
+							System.out.printf("Mas antes, salvando dados...");				
+							
+							FileWriter gravador = new FileWriter(des);
+							gravador.write("Nomes: " + vetor[i]);
+							gravador.write(System.lineSeparator());
+							gravador.write("Notas: " + matriz[i][5]);
+							gravador.close();
+							System.out.printf(String.format("Arquivo %s salvo com sucesso!", des));
+							System.out.println("Indo para o menu principal...");
+							i = 101;
+						
+							
+						}catch(IOException es){
+							
+							System.err.printf("Erro na gravação do arquivo: %s \n", es.getMessage());
+								
+						}				}
+						
+						i = 110;
+							break;
+						}
+						
+							
+					}
+				
+				break;
+				
+				case "2":
+					System.out.println("Você selecionou a segunda opção, ver notas da turma");
+					t1.carregar();
+				break;
+					
+				case "3":
+					System.out.println("Você selecionou a terceira opção, ver resultados");
+					t1.resultados();
+				break;
+				
+				case "4":
+					System.out.println("Você selecionou a quarta opção, sair");
+					System.out.println("Tchauu...");
+					d="4";
+				break;
+				
+				default:
+					System.out.println("Opção inválida!");		
+				}
+				
+				
+					}
+				}
+	}
+
+				
+
+
+							
+					
+				
+				
+				
+				
+				
+				
+			
+				
+		
+	
+
