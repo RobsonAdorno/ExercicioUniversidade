@@ -1,0 +1,94 @@
+create database Loja;
+use Loja;
+
+drop table inf_loja;
+drop table vendedores;
+
+create table inf_loja(
+id_loja int auto_increment,
+nome varchar (50),
+primary key (id_loja)
+);
+
+select * from inf_loja;
+
+create table vendedores(
+id_loja int,
+matricula int auto_increment,
+nome varchar (50),
+cpf varchar(11),
+foreign key (id_loja) references inf_loja(id_loja),
+primary key(matricula)
+);
+select matricula from vendedores;
+select * from vendedores;
+
+insert into inf_loja(id_loja,nome) values ('1','Rua XV');
+insert into inf_loja(id_loja,nome) values ('2','Palladium');
+insert into inf_loja(id_loja,nome) values ('3', 'Padocaria');
+
+truncate table vendedores;
+insert into vendedores(id_loja,nome,cpf) values ('1','João da silva','12345678900');
+insert into vendedores(id_loja,nome,cpf) values ('1','Ana Santos', '98765432111');
+insert into vendedores(id_loja,nome,cpf) values ('1','Imaculada Soares', '34565478998');
+insert into vendedores(id_loja,nome,cpf) values ('1','Paulo Roberto','32154321100');
+
+insert into vendedores(id_loja,nome,cpf) values ('2','Paulo Roberto', '45665445666' );
+insert into vendedores(id_loja,nome,cpf) values ('2','Beatriz Aparecida', '09889009888');
+
+#Mostre todas as lojas:
+select nome from inf_loja;
+
+#Mostre todos os vendedores:
+select nome from vendedores;
+
+#Mostre nome e matricula dos vendores em ordem alfabética de nome:
+
+select nome,matricula from vendedores order by nome;
+
+#Mostre nome e matricula dos vendores em ordem alfabética de nome (decrescente)
+select nome,matricula from vendedores order by nome desc;
+
+#Mostre os vendedores que trabalham na loja 1:
+
+select id_loja,nome from vendedores where id_loja = 1;
+
+#Mostre os vendedores que trabalham na loja 2:
+
+select id_loja,nome from vendedores where id_loja = 2;
+
+#Mostre os dados das lojas e dos respectivos vendedores
+
+select inf_loja.nome, vendedores.nome from inf_loja 
+inner join vendedores;
+
+# Altere o nome da loja 1 de 'Rua XV' para 'Centro'
+
+update inf_loja set nome = 'Centro' where inf_loja.id_loja = 1;
+select nome from inf_loja;
+
+#Altere o nome da loja 2 de 'Palladium' para 'Palladium Curitiba'
+update inf_loja set nome = 'Palladium Curitiba' where inf_loja.id_loja = 2;
+
+#Altere a loja do vendedor Paulo Roberto da Loja 2 para 1
+
+select id_loja,nome from vendedores;
+
+update vendedores set id_loja = '1' where nome = 'Paulo Roberto';
+
+#(Pequeno desafio) Transfira todos os vendedores da loja 1 para a loja 2
+
+update vendedores set id_loja = '2' where id_loja = '1';
+
+
+#Mostre todas as lojas e os respectivos vendedores
+#(lojas sem vendedores devem ser mostradas)
+
+select inf_loja.nome, vendedores.nome from inf_loja
+left join  vendedores 
+on  inf_loja.id_loja = vendedores.id_loja 
+
+
+
+
+
